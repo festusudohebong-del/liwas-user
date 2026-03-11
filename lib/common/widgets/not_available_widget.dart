@@ -1,0 +1,35 @@
+﻿import 'package:liwas_user/features/store/domain/models/store_model.dart';
+import 'package:liwas_user/helper/date_converter.dart';
+import 'package:liwas_user/util/dimensions.dart';
+import 'package:liwas_user/util/styles.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class NotAvailableWidget extends StatelessWidget {
+  final double fontSize;
+  final bool isStore;
+  final bool isAllSideRound;
+  final double? radius;
+  final Store? store;
+  const NotAvailableWidget({super.key, this.fontSize = 12, this.isStore = false, this.isAllSideRound = true, this.radius = Dimensions.radiusSmall, this.store});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 0, left: 0, bottom: 0, right: 0,
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(borderRadius: isAllSideRound ? BorderRadius.circular(radius!) :  BorderRadius.vertical(top: Radius.circular(radius!)), color: Colors.black.withValues(alpha: 0.6)),
+        child: Text(
+          isStore
+              ? store != null
+              ? store!.storeOpeningTime == 'closed' ? 'Closed now'.tr : '${'Closed now'.tr} ${!store!.active! ? '' : '(${'Open at'.tr} ${DateConverter.convertRestaurantOpenTime(store!.storeOpeningTime!)})'}'
+              : 'Closed now'.tr
+              : 'Not available now break'.tr,
+          textAlign: TextAlign.center,
+          style: ralewayMedium.copyWith(color: Colors.white, fontSize: fontSize),
+        ),
+      ),
+    );
+  }
+}

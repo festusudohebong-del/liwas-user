@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>578255787212-evt1ftt3ilmhc43dg6ojl4mdtachq1i4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.578255787212-evt1ftt3ilmhc43dg6ojl4mdtachq1i4</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>578255787212-i32gqm3uiie5q5ragqbso1v7bbouqb8p.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBTcD3k7g7WfTQjzKifnv5jH-Pwn5qvAxs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>578255787212</string>
+	<key>PLIST_VERSION</key>	
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.liwasride.user</string>
+	<key>PROJECT_ID</key>
+	<string>liwas-793a1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>liwas-793a1.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:578255787212:ios:8410d1a61f976f56bf9e69</string>
+</dict>
+</plist>
