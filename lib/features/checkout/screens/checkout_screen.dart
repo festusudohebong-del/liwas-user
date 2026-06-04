@@ -1,4 +1,4 @@
-﻿import 'package:just_the_tooltip/just_the_tooltip.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:liwas_user/common/widgets/address_widget.dart';
 import 'package:liwas_user/features/address/controllers/address_controller.dart';
 import 'package:liwas_user/features/cart/controllers/cart_controller.dart';
@@ -446,7 +446,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                 double additionalCharge = Get.find<SplashController>()
                         .configModel!
                         .additionalChargeStatus!
-                    ? Get.find<SplashController>().configModel!.additionCharge!
+                    ? Get.find<SplashController>().additionalChargeSum
                     : 0;
                 double originalCharge = _calculateOriginalDeliveryCharge(
                   store: checkoutController.store,

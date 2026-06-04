@@ -1,4 +1,4 @@
-﻿import 'package:dotted_border/dotted_border.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -126,7 +126,7 @@ class _ParcelRequestScreenState extends State<ParcelRequestScreen> {
             double charge = -1;
             double total = 0;
             double dmTips = 0;
-            double additionalCharge =  Get.find<SplashController>().configModel!.additionalChargeStatus! ? Get.find<SplashController>().configModel!.additionCharge! : 0;
+            double additionalCharge =  Get.find<SplashController>().configModel!.additionalChargeStatus! ? Get.find<SplashController>().additionalChargeSum : 0;
 
             if(parcelController.distance != -1 && parcelController.extraCharge != null) {
               charge = _calculateParcelDeliveryCharge(parcelController: parcelController, parcelCategory: widget.parcelCategory, zoneId: widget.pickedUpAddress.zoneId!);
@@ -603,15 +603,58 @@ class _ParcelRequestScreenState extends State<ParcelRequestScreen> {
                     ]),
                     SizedBox(height: ((checkoutController.taxIncluded == null) || (checkoutController.taxIncluded == 1)) ? 0 : Dimensions.paddingSizeSmall),
 
-                    Get.find<SplashController>().configModel!.additionalChargeStatus! ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                      Expanded(child: Text(Get.find<SplashController>().configModel!.additionalChargeName!, style: ralewayRegular, overflow: TextOverflow.ellipsis, maxLines: 1)),
-                      SizedBox(width: Dimensions.paddingSizeSmall),
-
-                      Text(
-                        '(+) ${PriceConverter.convertPrice(Get.find<SplashController>().configModel!.additionCharge)}',
-                        style: ralewayRegular, textDirection: TextDirection.ltr,
-                      ),
-                    ]) : const SizedBox(),
+                    Get.find<SplashController>().configModel!.additionalChargeStatus!
+                        ? Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    Get.find<SplashController>().configModel!.additionalChargeName!,
+                                    style: ralewayRegular.copyWith(color: Theme.of(context).disabledColor),
+                                  ),
+                                  Text(
+                                    '(+) ${PriceConverter.convertPrice(Get.find<SplashController>().configModel!.additionCharge!)}',
+                                    style: ralewayRegular.copyWith(color: Theme.of(context).disabledColor),
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                ],
+                              ),
+                              if (Get.find<SplashController>().activeAdditionalCharges != null &&
+                                  Get.find<SplashController>().activeAdditionalCharges!.isNotEmpty)
+                                ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.only(top: Dimensions.paddingSizeSmall),
+                                  itemCount: Get.find<SplashController>().activeAdditionalCharges!.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(bottom: 10),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              Get.find<SplashController>().activeAdditionalCharges![index].chargeName!,
+                                              style: ralewayRegular.copyWith(color: Theme.of(context).disabledColor),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          const SizedBox(width: Dimensions.paddingSizeSmall),
+                                          Text(
+                                            '(+) ${PriceConverter.convertPrice(Get.find<SplashController>().activeAdditionalCharges![index].chargeAmount)}',
+                                            style: ralewayRegular.copyWith(color: Theme.of(context).disabledColor),
+                                            textDirection: TextDirection.ltr,
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                            ],
+                          )
+                        : const SizedBox(),
 
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),

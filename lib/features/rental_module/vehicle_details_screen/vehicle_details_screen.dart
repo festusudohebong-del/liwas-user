@@ -223,20 +223,20 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
 
                                 vehicle.tripDistance! ? TripTypeCard(
-                                  tripType: 'distance_wise', amount: PriceConverter.convertPrice(vehicle.distancePrice ?? 0, forTaxi: true), discountAmount: PriceConverter.convertPrice(vehicle.distancePrice! - distanceWiseDiscount, forTaxi: true), fareType: 'km', indicatorIcon: Icons.radio_button_off,
+                                  tripType: 'Distance wise', amount: PriceConverter.convertPrice(vehicle.distancePrice ?? 0, forTaxi: true), discountAmount: PriceConverter.convertPrice(vehicle.distancePrice! - distanceWiseDiscount, forTaxi: true), fareType: 'km', indicatorIcon: Icons.radio_button_off,
                                   isVehicleDetailScene: false, isClockIcon: false, fromVehicleDetails: true, haveVehicle: true, discountType: discountType,
                                 ) : const SizedBox(),
                                 SizedBox(width: vehicle.tripDistance! && vehicle.tripHourly! ? Dimensions.paddingSizeDefault : 0),
 
                                 vehicle.tripHourly! ? TripTypeCard(
-                                  tripType: 'hourly', amount: PriceConverter.convertPrice(vehicle.hourlyPrice ?? 0, forTaxi: true),  discountAmount: PriceConverter.convertPrice(vehicle.hourlyPrice! - hourlyDiscount, forTaxi: true),
+                                  tripType: 'Hourly', amount: PriceConverter.convertPrice(vehicle.hourlyPrice ?? 0, forTaxi: true),  discountAmount: PriceConverter.convertPrice(vehicle.hourlyPrice! - hourlyDiscount, forTaxi: true),
                                   fareType: 'hr', indicatorIcon: Icons.radio_button_checked,
                                   isVehicleDetailScene: false, isClockIcon: false, fromVehicleDetails: true, haveVehicle: true, discountType: discountType,
                                 ) : const SizedBox(),
                                 SizedBox(width: vehicle.tripHourly! ? Dimensions.paddingSizeDefault : 0),
 
                                 vehicle.tripDayWise! ? TripTypeCard(
-                                  tripType: 'day_wise', amount: PriceConverter.convertPrice(vehicle.dayWisePrice ?? 0), discountAmount: PriceConverter.convertPrice(vehicle.dayWisePrice! - dayWiseDiscount, forTaxi: true),
+                                  tripType: 'Day wise', amount: PriceConverter.convertPrice(vehicle.dayWisePrice ?? 0), discountAmount: PriceConverter.convertPrice(vehicle.dayWisePrice! - dayWiseDiscount, forTaxi: true),
                                   fareType: 'day', indicatorIcon: Icons.radio_button_checked,
                                   isVehicleDetailScene: false, isClockIcon: false, fromVehicleDetails: true, haveVehicle: true, discountType: discountType,
                                 ) : const SizedBox(),

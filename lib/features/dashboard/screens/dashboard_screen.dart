@@ -1,4 +1,4 @@
-﻿// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use
 
 import 'dart:async';
 import 'dart:io';
@@ -262,7 +262,8 @@ class DashboardScreenState extends State<DashboardScreen> {
                                 Theme.of(context).brightness == Brightness.dark;
 
                             const navBarHeight = 70.0;
-                            const navBarBorderRadius = 25.0;
+                            const navBarBorderRadius =
+                                35.0; // Perfect pill shape
 
                             return SizedBox(
                               height:
@@ -276,92 +277,109 @@ class DashboardScreenState extends State<DashboardScreen> {
                                     bottom: 10,
                                     left: 15,
                                     right: 15,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(
-                                          navBarBorderRadius),
-                                      child: BackdropFilter(
-                                        filter: ImageFilter.blur(
-                                            sigmaX: 20, sigmaY: 20),
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: navBarHeight,
-                                          decoration: BoxDecoration(
-                                            color: (isDark
-                                                    ? Colors.black
-                                                    : Colors.white)
-                                                .withValues(alpha: 0.1),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            navBarBorderRadius),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black
+                                                .withValues(alpha: 0.08),
+                                            blurRadius: 20,
+                                            spreadRadius: 0,
+                                            offset: const Offset(0, 8),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
                                             borderRadius: BorderRadius.circular(
                                                 navBarBorderRadius),
-                                            border: Border.all(
-                                              color: Colors.white
-                                                  .withValues(alpha: 0.1),
-                                              width: 1.5,
+                                            child: BackdropFilter(
+                                              filter: ImageFilter.blur(
+                                                  sigmaX: 20, sigmaY: 20),
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: navBarHeight,
+                                                color: Colors.transparent,
+                                              ),
                                             ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withValues(alpha: 0.15),
-                                                blurRadius: 20,
-                                                offset: const Offset(0, 10),
-                                              ),
-                                            ],
                                           ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              BottomNavItemWidget(
-                                                title: 'Home'.tr,
-                                                selectedIcon: Images.homeIcon,
-                                                unSelectedIcon: Images.homeIcon,
-                                                isSelected: _pageIndex == 0,
-                                                onTap: () => _setPage(0),
+                                          Container(
+                                            width: double.infinity,
+                                            height: navBarHeight,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      navBarBorderRadius),
+                                              color: (isDark
+                                                      ? Colors.black
+                                                      : Colors.white)
+                                                  .withValues(alpha: 0.85),
+                                              border: Border.all(
+                                                color: Colors.white
+                                                    .withValues(alpha: 0.3),
+                                                width: 1.0,
                                               ),
-                                              BottomNavItemWidget(
-                                                title: isParcel
-                                                    ? 'Address'.tr
-                                                    : isTaxi
-                                                        ? 'Wishlist'.tr
-                                                        : 'Favourite'.tr,
-                                                selectedIcon: isParcel
-                                                    ? Images.addressIcon
-                                                    : Images.favouriteUnselect,
-                                                unSelectedIcon: isParcel
-                                                    ? Images.addressIcon
-                                                    : Images.favouriteUnselect,
-                                                isSelected: _pageIndex == 1,
-                                                onTap: () => _setPage(1),
-                                              ),
-                                              const SizedBox(width: 58),
-                                              BottomNavItemWidget(
-                                                title: isTaxi
-                                                    ? 'Trips'.tr
-                                                    : 'Orders'.tr,
-                                                selectedIcon: Images.orders,
-                                                unSelectedIcon: Images.orders,
-                                                isSelected: _pageIndex == 3,
-                                                onTap: () => _setPage(3),
-                                              ),
-                                              BottomNavItemWidget(
-                                                title: 'Menu'.tr,
-                                                selectedIcon: Images.menu,
-                                                unSelectedIcon: Images.menu,
-                                                isSelected: _pageIndex == 4,
-                                                onTap: () => _setPage(4),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                BottomNavItemWidget(
+                                                  title: 'Home'.tr,
+                                                  selectedIcon: Images.homeIcon,
+                                                  unSelectedIcon:
+                                                      Images.homeIcon,
+                                                  isSelected: _pageIndex == 0,
+                                                  onTap: () => _setPage(0),
+                                                ),
+                                                BottomNavItemWidget(
+                                                  title: isParcel
+                                                      ? 'Address'.tr
+                                                      : isTaxi
+                                                          ? 'Wishlist'.tr
+                                                          : 'Favourite'.tr,
+                                                  selectedIcon: isParcel
+                                                      ? Images.addressIcon
+                                                      : Images
+                                                          .favouriteUnselect,
+                                                  unSelectedIcon: isParcel
+                                                      ? Images.addressIcon
+                                                      : Images
+                                                          .favouriteUnselect,
+                                                  isSelected: _pageIndex == 1,
+                                                  onTap: () => _setPage(1),
+                                                ),
+                                                const SizedBox(width: 58),
+                                                BottomNavItemWidget(
+                                                  title: isTaxi
+                                                      ? 'Trips'.tr
+                                                      : 'Orders'.tr,
+                                                  selectedIcon: Images.orders,
+                                                  unSelectedIcon: Images.orders,
+                                                  isSelected: _pageIndex == 3,
+                                                  onTap: () => _setPage(3),
+                                                ),
+                                                BottomNavItemWidget(
+                                                  title: 'Menu'.tr,
+                                                  selectedIcon: Images.menu,
+                                                  unSelectedIcon: Images.menu,
+                                                  isSelected: _pageIndex == 4,
+                                                  onTap: () => _setPage(4),
+                                                ),
+                                              ], // close Row children
+                                            ), // close Row
+                                          ), // close Container (layer 2)
+                                        ], // close Stack children
+                                      ), // close Stack
+                                    ), // close Container (with shadow)
+                                  ), // close Positioned
                                   // Floating Cart Button
                                   Positioned(
                                     bottom:
-                                        12.5, // Perfectly centered vertically relative to the 70px bar at bottom: 10.
-                                    // If bar is 70, middle is at 35.
-                                    // Let's use 30px from bottom to make it float slightly above the center line.
+                                        15, // Center perfectly over the 70px bar (10 bottom + 35 center = 45. FAB is 60 -> 45 - 30 = 15)
                                     child: (ResponsiveHelper.isDesktop(
                                                 context) ||
                                             (widget.fromSplash &&
@@ -379,29 +397,20 @@ class DashboardScreenState extends State<DashboardScreen> {
                                                 _isLogin))
                                         ? const SizedBox()
                                         : Container(
-                                            width: 65,
-                                            height: 65,
+                                            width: 60,
+                                            height: 60,
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Theme.of(context)
-                                                      .primaryColor,
-                                                  Theme.of(context)
-                                                      .primaryColor
-                                                      .withValues(alpha: 0.8),
-                                                ],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Theme.of(context)
                                                       .primaryColor
-                                                      .withValues(alpha: 0.4),
-                                                  blurRadius: 20,
-                                                  spreadRadius: 2,
-                                                  offset: const Offset(0, 8),
+                                                      .withValues(alpha: 0.3),
+                                                  blurRadius: 15,
+                                                  spreadRadius: 0,
+                                                  offset: const Offset(0, 6),
                                                 ),
                                               ],
                                             ),

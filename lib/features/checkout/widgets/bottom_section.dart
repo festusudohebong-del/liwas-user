@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liwas_user/common/widgets/custom_tool_tip_widget.dart';
 import 'package:liwas_user/features/cart/controllers/cart_controller.dart';
@@ -402,24 +402,58 @@ class BottomSection extends StatelessWidget {
                     ? Dimensions.paddingSizeSmall
                     : 0),
             Get.find<SplashController>().configModel!.additionalChargeStatus!
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ? Column(
                     children: [
-                        Expanded(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
                             child: Text(
-                                Get.find<SplashController>()
-                                    .configModel!
-                                    .additionalChargeName!,
-                                style: ralewayRegular,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1)),
-                        SizedBox(width: Dimensions.paddingSizeSmall),
-                        Text(
-                          '(+) ${PriceConverter.convertPrice(Get.find<SplashController>().configModel!.additionCharge)}',
-                          style: ralewayRegular,
-                          textDirection: TextDirection.ltr,
+                              Get.find<SplashController>().configModel!.additionalChargeName!,
+                              style: ralewayRegular,
+                            ),
+                          ),
+                          Text(
+                            '(+) ${PriceConverter.convertPrice(Get.find<SplashController>().configModel!.additionCharge!)}',
+                            style: ralewayRegular,
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ],
+                      ),
+                      if (Get.find<SplashController>().activeAdditionalCharges != null &&
+                          Get.find<SplashController>().activeAdditionalCharges!.isNotEmpty)
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: Get.find<SplashController>().activeAdditionalCharges!.length,
+                          padding: const EdgeInsets.only(top: Dimensions.paddingSizeSmall),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      Get.find<SplashController>().activeAdditionalCharges![index].chargeName!,
+                                      style: ralewayRegular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  const SizedBox(width: Dimensions.paddingSizeSmall),
+                                  Text(
+                                    '(+) ${PriceConverter.convertPrice(Get.find<SplashController>().activeAdditionalCharges![index].chargeAmount)}',
+                                    style: ralewayRegular,
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                      ])
+                    ],
+                  )
                 : const SizedBox(),
             SizedBox(
                 height: checkoutController.isPartialPay

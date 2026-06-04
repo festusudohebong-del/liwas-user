@@ -1,4 +1,4 @@
-﻿import 'package:dotted_border/dotted_border.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liwas_user/common/widgets/custom_asset_image_widget.dart';
@@ -113,11 +113,29 @@ class OrderCalculationWidget extends StatelessWidget {
                 ]),
                 SizedBox(height: (tax == 0) || taxIncluded ? 0 : 10),
 
-                (order.additionalCharge != null && order.additionalCharge! > 0) ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                (order.additionalCharge != null && order.additionalCharge! > 0 && Get.find<SplashController>().activeAdditionalCharges != null && Get.find<SplashController>().activeAdditionalCharges!.isNotEmpty) ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: Get.find<SplashController>().activeAdditionalCharges!.length,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                        Expanded(child: Text(Get.find<SplashController>().activeAdditionalCharges![index].chargeName!, style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall),
+                          maxLines: 1, overflow: TextOverflow.ellipsis,
+                        )),
+                        const SizedBox(width: 10),
+
+                        Text('(+) ${PriceConverter.convertPrice(Get.find<SplashController>().activeAdditionalCharges![index].chargeAmount)}', style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall), textDirection: TextDirection.ltr),
+                      ]),
+                    );
+                  },
+                ) : (order.additionalCharge != null && order.additionalCharge! > 0) ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Expanded(child: Text(Get.find<SplashController>().configModel!.additionalChargeName!, style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall),
-                  maxLines: 1, overflow: TextOverflow.ellipsis,
+                    maxLines: 1, overflow: TextOverflow.ellipsis,
                   )),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
 
                   Text('(+) ${PriceConverter.convertPrice(order.additionalCharge)}', style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall), textDirection: TextDirection.ltr),
                 ]) : const SizedBox(),
@@ -172,11 +190,29 @@ class OrderCalculationWidget extends StatelessWidget {
                 ) : const SizedBox(),
                 SizedBox(height: referrerBonusAmount > 0 ? 10 : 0),
 
-                (order.additionalCharge != null && order.additionalCharge! > 0) ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                (order.additionalCharge != null && order.additionalCharge! > 0 && Get.find<SplashController>().activeAdditionalCharges != null && Get.find<SplashController>().activeAdditionalCharges!.isNotEmpty) ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: Get.find<SplashController>().activeAdditionalCharges!.length,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                        Expanded(child: Text(Get.find<SplashController>().activeAdditionalCharges![index].chargeName!, style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall),
+                          maxLines: 1, overflow: TextOverflow.ellipsis,
+                        )),
+                        const SizedBox(width: 10),
+
+                        Text('(+) ${PriceConverter.convertPrice(Get.find<SplashController>().activeAdditionalCharges![index].chargeAmount)}', style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall), textDirection: TextDirection.ltr),
+                      ]),
+                    );
+                  },
+                ) : (order.additionalCharge != null && order.additionalCharge! > 0) ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Expanded(
                     child: Text(Get.find<SplashController>().configModel!.additionalChargeName!, style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall), maxLines: 1, overflow: TextOverflow.ellipsis),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
 
                   Text('(+) ${PriceConverter.convertPrice(order.additionalCharge)}', style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeSmall), textDirection: TextDirection.ltr),
                 ]) : const SizedBox(),

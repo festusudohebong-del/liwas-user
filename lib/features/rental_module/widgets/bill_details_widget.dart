@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liwas_user/common/widgets/custom_tool_tip_widget.dart';
 import 'package:liwas_user/features/rental_module/rental_cart_screen/controllers/taxi_cart_controller.dart';
@@ -76,13 +76,28 @@ class BillDetailsWidget extends StatelessWidget {
           ]),
 
           if(Get.find<SplashController>().configModel!.additionalChargeStatus!)
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(Get.find<SplashController>().configModel!.additionalChargeName!, style: ralewayRegular),
-            Text(
-              '+ ${PriceConverter.convertPrice(serviceFee, forTaxi: true)}',
-              style: ralewayRegular, textDirection: TextDirection.ltr,
+            Column(
+              children: [
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text(Get.find<SplashController>().configModel!.additionalChargeName!, style: ralewayRegular),
+                  Text(
+                    '+ ${PriceConverter.convertPrice(serviceFee, forTaxi: true)}',
+                    style: ralewayRegular, textDirection: TextDirection.ltr,
+                  ),
+                ]),
+                if(Get.find<SplashController>().activeAdditionalCharges != null && Get.find<SplashController>().activeAdditionalCharges!.isNotEmpty)
+                  ...Get.find<SplashController>().activeAdditionalCharges!.map((charge) => Padding(
+                    padding: const EdgeInsets.only(top: Dimensions.paddingSizeSmall),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                      Text(charge.chargeName!, style: ralewayRegular),
+                      Text(
+                        '+ ${PriceConverter.convertPrice(charge.chargeAmount ?? 0, forTaxi: true)}',
+                        style: ralewayRegular, textDirection: TextDirection.ltr,
+                      ),
+                    ]),
+                  )),
+              ],
             ),
-          ]),
 
 
     ]);

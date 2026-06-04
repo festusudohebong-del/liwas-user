@@ -1,4 +1,4 @@
-﻿import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -59,7 +59,7 @@ class ParcelController extends GetxController implements GetxService {
   int _paymentIndex = -1;
   int get paymentIndex => _paymentIndex;
 
-  bool _acceptTerms = true;
+  bool _acceptTerms = false;
   bool get acceptTerms => _acceptTerms;
 
   double? _extraCharge;

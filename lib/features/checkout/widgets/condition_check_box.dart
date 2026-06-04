@@ -1,9 +1,13 @@
-﻿import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart';
 import 'package:liwas_user/features/splash/controllers/splash_controller.dart';
 import 'package:liwas_user/helper/route_helper.dart';
 import 'package:liwas_user/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:liwas_user/features/checkout/controllers/checkout_controller.dart';
+import 'package:liwas_user/features/parcel/controllers/parcel_controller.dart';
+import 'package:liwas_user/util/dimensions.dart';
 
 class CheckoutCondition extends StatelessWidget {
   final bool isParcel;
@@ -13,16 +17,32 @@ class CheckoutCondition extends StatelessWidget {
   Widget build(BuildContext context) {
     bool activeRefund = Get.find<SplashController>().configModel!.refundPolicyStatus == 1;
     return Row(children: [
-      // SizedBox(
-      //   width: 24.0,
-      //   height: 24.0,
-      //   child: Checkbox(
-      //     activeColor: Theme.of(context).primaryColor,
-      //     value: isParcel ? parcelController.acceptTerms : orderController.acceptTerms,
-      //     onChanged: (bool? isChecked) => isParcel ? parcelController.toggleTerms() : orderController.toggleTerms(),
-      //   ),
-      // ),
-      // const SizedBox(width: Dimensions.paddingSizeSmall),
+      isParcel ? GetBuilder<ParcelController>(
+        builder: (parcelController) {
+          return SizedBox(
+            width: 24.0,
+            height: 24.0,
+            child: Checkbox(
+              activeColor: Theme.of(context).primaryColor,
+              value: parcelController.acceptTerms,
+              onChanged: (bool? isChecked) => parcelController.toggleTerms(),
+            ),
+          );
+        }
+      ) : GetBuilder<CheckoutController>(
+        builder: (checkoutController) {
+          return SizedBox(
+            width: 24.0,
+            height: 24.0,
+            child: Checkbox(
+              activeColor: Theme.of(context).primaryColor,
+              value: checkoutController.acceptTerms,
+              onChanged: (bool? isChecked) => checkoutController.toggleTerms(),
+            ),
+          );
+        }
+      ),
+      const SizedBox(width: Dimensions.paddingSizeSmall),
 
       Expanded(
         child: RichText(text: TextSpan(children: [

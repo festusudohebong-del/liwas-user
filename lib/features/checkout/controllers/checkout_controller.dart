@@ -86,8 +86,13 @@ class CheckoutController extends GetxController implements GetxService {
   Uint8List? _rawAttachment;
   Uint8List? get rawAttachment => _rawAttachment;
 
-  bool _acceptTerms = true;
+  bool _acceptTerms = false;
   bool get acceptTerms => _acceptTerms;
+
+  void toggleTerms() {
+    _acceptTerms = !_acceptTerms;
+    update();
+  }
 
   int _paymentMethodIndex = -1;
   int get paymentMethodIndex => _paymentMethodIndex;
@@ -303,7 +308,7 @@ class CheckoutController extends GetxController implements GetxService {
   void clearPrevData() {
     _distance = null;
     _addressIndex = 0;
-    _acceptTerms = true;
+    _acceptTerms = false;
     _paymentMethodIndex = -1;
     _selectedDateSlot = 0;
     _selectedTimeSlot = 0;

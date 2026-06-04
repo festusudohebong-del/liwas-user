@@ -88,6 +88,7 @@ class ConfigModel {
   ParcelCancellationBasicSetup? parcelCancellationBasicSetup;
   ParcelReturnTimeFee? parcelReturnTimeFee;
   bool? websocketEnabled;
+  List<AdditionalChargeModel>? additionalChargeList;
 
   ConfigModel({
     this.businessName,
@@ -176,6 +177,7 @@ class ConfigModel {
     this.parcelCancellationBasicSetup,
     this.parcelReturnTimeFee,
     this.websocketEnabled,
+    this.additionalChargeList,
   });
 
   ConfigModel.fromJson(Map<String, dynamic> json) {
@@ -262,6 +264,12 @@ class ConfigModel {
     additionalChargeStatus = json['additional_charge_status'] == 1;
     additionalChargeName = json['additional_charge_name'];
     additionCharge = json['additional_charge']?.toDouble() ?? 0;
+    if (json['additional_charge_list'] != null) {
+      additionalChargeList = <AdditionalChargeModel>[];
+      json['additional_charge_list'].forEach((v) {
+        additionalChargeList!.add(AdditionalChargeModel.fromJson(v));
+      });
+    }
     if (json['active_payment_method_list'] != null) {
       activePaymentMethodList = <PaymentBody>[];
       json['active_payment_method_list'].forEach((v) {
@@ -371,6 +379,9 @@ class ConfigModel {
     data['partial_payment_method'] = partialPaymentMethod;
     data['additional_charge_status'] = additionalChargeStatus;
     data['additional_charge_name'] = additionalChargeName;
+    if (additionalChargeList != null) {
+      data['additional_charge_list'] = additionalChargeList!.map((v) => v.toJson()).toList();
+    }
     data['additional_charge'] = additionCharge;
     if (activePaymentMethodList != null) {
       data['active_payment_method_list'] = activePaymentMethodList!.map((v) => v.toJson()).toList();
@@ -924,6 +935,33 @@ class ParcelReturnTimeFee {
     data['parcel_return_time'] = parcelReturnTime;
     data['return_time_type'] = returnTimeType;
     data['return_fee_for_dm'] = returnFeeForDm;
+    return data;
+  }
+}
+
+class AdditionalChargeModel {
+  String? chargeName;
+  double? chargeAmount;
+  List<int>? modules;
+
+  AdditionalChargeModel({this.chargeName, this.chargeAmount, this.modules});
+
+  AdditionalChargeModel.fromJson(Map<String, dynamic> json) {
+    chargeName = json['charge_name'];
+    chargeAmount = json['charge_amount']?.toDouble();
+    if (json['modules'] != null) {
+      modules = [];
+      json['modules'].forEach((v) {
+        modules!.add(int.parse(v.toString()));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['charge_name'] = chargeName;
+    data['charge_amount'] = chargeAmount;
+    data['modules'] = modules;
     return data;
   }
 }

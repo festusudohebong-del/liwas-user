@@ -81,6 +81,7 @@ class PlaceOrderBodyModel {
     required String? password,
     this.isPrescriptionOrder = false,
     double? bringChangeAmount,
+    double? additionalCharge,
   }) {
     _cart = cart;
     _couponDiscountAmount = couponDiscountAmount;
@@ -94,6 +95,7 @@ class PlaceOrderBodyModel {
     _scheduleAt = scheduleAt;
     _discountAmount = discountAmount;
     _taxAmount = taxAmount;
+    _additionalCharge = additionalCharge;
     _address = address;
     _receiverDetails = receiverDetails;
     _latitude = latitude;
@@ -159,6 +161,8 @@ class PlaceOrderBodyModel {
   String? get password => _password;
   bool? get isPrescription => isPrescriptionOrder;
   double? get bringChangeAmount => _bringChangeAmount;
+  double? _additionalCharge;
+  double? get additionalCharge => _additionalCharge;
 
   PlaceOrderBodyModel.fromJson(Map<String, dynamic> json) {
     if (json['cart'] != null) {
@@ -205,6 +209,7 @@ class PlaceOrderBodyModel {
     _password = json['password'];
     isPrescriptionOrder = json['is_prescription'] != null ? json['is_prescription'] == 'true' : false;
     _bringChangeAmount = json['bring_change_amount'] != null ? double.parse(json['bring_change_amount'].toString()) : null;
+    _additionalCharge = json['additional_charge'] != null ? double.parse(json['additional_charge'].toString()) : null;
   }
 
   Map<String, String> toJson() {
@@ -276,6 +281,9 @@ class PlaceOrderBodyModel {
     data['is_prescription'] = isPrescriptionOrder == true ? 'true' : 'false';
     if(_bringChangeAmount != null) {
       data['bring_change_amount'] = _bringChangeAmount.toString();
+    }
+    if(_additionalCharge != null) {
+      data['additional_charge'] = _additionalCharge.toString();
     }
     return data;
   }

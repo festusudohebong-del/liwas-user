@@ -15,11 +15,55 @@
       },
       "oauth_client": [
         {
-          "client_id": "578255787212-vkf45smchmbgkesrrihncqdu9hd59hvg.apps.googleusercontent.com",
+          "client_id": "578255787212-ohb45bfacesr3gq5ihgdlhiqj16c7ad3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.liwas_ride",
-            "certificate_hash": "b669ac1a24f8f7188ae1e37e726d72e80f02412e"
+            "certificate_hash": "308d285ce969e15eba2679f1d49e85fb5edbf85d"
+          }
+        },
+        {
+          "client_id": "578255787212-h1rp8b909pn6rsu1odrolk7u10b0smoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgpK2c0Lt6_5Ddwq3Wss-4IIAkXBdZ3Sw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578255787212-h1rp8b909pn6rsu1odrolk7u10b0smoq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "578255787212-cbirtob7cu6153gnj6kgh26t32g9adjc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.liwasRide"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578255787212:android:08a22ce668c17641bf9e69",
+        "android_client_info": {
+          "package_name": "com.liwasride.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578255787212-1129rq22na5kfh8rvo853kk6pugc5tqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.liwasride.driver",
+            "certificate_hash": "308d285ce969e15eba2679f1d49e85fb5edbf85d"
           }
         },
         {
@@ -59,6 +103,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "578255787212-hshtdugsgeq34rkol5pmobmcqsht1uru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.liwasride.user",
+            "certificate_hash": "851447077649bf7acdf1e448dcbf069e8e34f968"
+          }
+        },
+        {
+          "client_id": "578255787212-in86dej59bdlurpgqh1i0oqpv1n03rti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.liwasride.user",
+            "certificate_hash": "3e1806a80f9acbbfcb7796bb5c079201dc35cb66"
+          }
+        },
+        {
           "client_id": "578255787212-h1rp8b909pn6rsu1odrolk7u10b0smoq.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -94,6 +154,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "578255787212-n75v5v9oucvp32sbj44sb5asog4c7tgf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.liwasride.vendor",
+            "certificate_hash": "2fbb62a688b14b9b7ad1d4e88492143eddef115d"
+          }
+        },
         {
           "client_id": "578255787212-h1rp8b909pn6rsu1odrolk7u10b0smoq.apps.googleusercontent.com",
           "client_type": 3

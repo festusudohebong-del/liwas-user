@@ -1,4 +1,4 @@
-﻿import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:liwas_user/common/controllers/theme_controller.dart';
 import 'package:liwas_user/features/banner/controllers/banner_controller.dart';
@@ -132,10 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     if(!ResponsiveHelper.isWeb()) {
-      Get.find<LocationController>().getZone(
-        AddressHelper.getUserAddressFromSharedPref()!.latitude,
-        AddressHelper.getUserAddressFromSharedPref()!.longitude, false, updateInAddress: true,
-      );
+      if (AddressHelper.getUserAddressFromSharedPref() != null) {
+        Get.find<LocationController>().getZone(
+          AddressHelper.getUserAddressFromSharedPref()!.latitude,
+          AddressHelper.getUserAddressFromSharedPref()!.longitude, false, updateInAddress: true,
+        );
+      }
     }
 
     _scrollController.addListener(() {
@@ -298,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: GetBuilder<LocationController>(builder: (locationController) {
                               return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                                 Text(
-                                  AuthHelper.isLoggedIn() ? AddressHelper.getUserAddressFromSharedPref()!.addressType!.tr : 'Your location'.tr,
+                                  AuthHelper.isLoggedIn() ? AddressHelper.getUserAddressFromSharedPref()?.addressType?.tr ?? 'Your location'.tr : 'Your location'.tr,
                                   style: ralewayMedium.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color, fontSize: Dimensions.fontSizeDefault),
                                   maxLines: 1, overflow: TextOverflow.ellipsis,
                                 ),
@@ -306,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Row(children: [
                                   Flexible(
                                     child: Text(
-                                      AddressHelper.getUserAddressFromSharedPref()!.address!,
+                                      AddressHelper.getUserAddressFromSharedPref()?.address ?? 'Set your location'.tr,
                                       style: ralewayRegular.copyWith(color: Theme.of(context).disabledColor, fontSize: Dimensions.fontSizeSmall),
                                       maxLines: 1, overflow: TextOverflow.ellipsis,
                                     ),

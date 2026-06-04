@@ -22,7 +22,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:liwas_user/features/home/widgets/cookies_view.dart';
+import 'package:device_preview/device_preview.dart';
 import 'helper/get_di.dart' as di;
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -91,7 +91,12 @@ Future<void> main() async {
 
   await TrackingHelper.requestTrackingPermission();
 
-  runApp(MyApp(languages: languages, body: body));
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => MyApp(languages: languages, body: body),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -164,37 +169,8 @@ class _MyAppState extends State<MyApp> {
                   getPages: RouteHelper.routes,
                   defaultTransition: Transition.topLevel,
                   transitionDuration: const Duration(milliseconds: 500),
-                  builder: (BuildContext context, widget) {
-                    return MediaQuery(
-                        data: MediaQuery.of(context)
-                            .copyWith(textScaler: const TextScaler.linear(1)),
-                        child: Material(
-                          child: SafeArea(
-                            top: false,
-                            bottom: GetPlatform.isAndroid,
-                            child: Stack(children: [
-                              widget!,
-                              GetBuilder<SplashController>(
-                                  builder: (splashController) {
-                                if (!splashController.savedCookiesData &&
-                                    !splashController.getAcceptCookiesStatus(
-                                        splashController.configModel != null
-                                            ? splashController
-                                                .configModel!.cookiesText!
-                                            : '')) {
-                                  return ResponsiveHelper.isWeb()
-                                      ? const Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: CookiesView())
-                                      : const SizedBox();
-                                } else {
-                                  return const SizedBox();
-                                }
-                              })
-                            ]),
-                          ),
-                        ));
-                  },
+                  useInheritedMediaQuery: true,
+                  builder: DevicePreview.appBuilder,
                 );
         });
       });

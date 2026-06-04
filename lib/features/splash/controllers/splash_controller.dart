@@ -36,6 +36,35 @@ class SplashController extends GetxController implements GetxService {
   ConfigModel? _configModel;
   ConfigModel? get configModel => _configModel;
 
+  List<AdditionalChargeModel>? get activeAdditionalCharges {
+    if (_configModel?.additionalChargeList == null) return null;
+    int? currentModuleId = _module?.id;
+    print('DEBUG: activeAdditionalCharges called. currentModuleId: $currentModuleId');
+    if (currentModuleId == null) return [];
+
+    var active = _configModel!.additionalChargeList!.where((charge) {
+      print('DEBUG: checking charge ${charge.chargeName} with modules ${charge.modules}');
+      return charge.modules?.contains(currentModuleId) ?? false;
+    }).toList();
+    print('DEBUG: active charges found: ${active.length}');
+    return active;
+  }
+
+  double get additionalChargeSum {
+    double baseCharge = _configModel?.additionCharge ?? 0;
+    if (_configModel?.additionalChargeList == null) return baseCharge;
+    int? currentModuleId = _module?.id;
+    if (currentModuleId == null) return baseCharge;
+
+    double sum = baseCharge;
+    for (var charge in _configModel!.additionalChargeList!) {
+      if (charge.modules != null && charge.modules!.contains(currentModuleId)) {
+        sum += charge.chargeAmount ?? 0;
+      }
+    }
+    return sum;
+  }
+
   bool _firstTimeConnectionCheck = true;
   bool get firstTimeConnectionCheck => _firstTimeConnectionCheck;
 

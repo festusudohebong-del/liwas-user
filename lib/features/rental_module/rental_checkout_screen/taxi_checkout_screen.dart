@@ -1,4 +1,4 @@
-﻿import 'package:country_code_picker/country_code_picker.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liwas_user/common/widgets/custom_app_bar.dart';
@@ -85,7 +85,7 @@ class _TaxiCheckoutScreenState extends State<TaxiCheckoutScreen> {
             taxiCartController.getTripTax(tripAmount: subtotal, tripType: rentalType, providerId: providerId, couponCode: '', scheduleTime: scheduleTime, isSchedule: isScheduled);
           }
 
-          double serviceFee = Get.find<SplashController>().configModel!.additionCharge??0;
+          double serviceFee = Get.find<SplashController>().additionalChargeSum;
           double total = subtotal + ((taxiCartController.taxIncluded == 1) ? 0 : taxiCartController.tripTax!) + serviceFee;
 
           if(_payableAmount != total && AuthHelper.isLoggedIn()) {

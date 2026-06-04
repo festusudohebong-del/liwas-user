@@ -29,14 +29,15 @@ class PortionWidget extends StatelessWidget {
       child: InkWell(
         onTap: onTap ?? () => Get.toNamed(route),
         borderRadius: BorderRadius.circular(Dimensions.radiusMedium),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Dimensions.paddingSizeDefault,
-            vertical: Dimensions.paddingSizeSmall + 4,
-          ),
-          child: Column(
-            children: [
-              Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: Dimensions.paddingSizeSmall + 4),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Dimensions.paddingSizeDefault,
+              ),
+              child: Row(
                 children: [
                   Container(
                     padding: const EdgeInsets.all(10),
@@ -91,17 +92,16 @@ class PortionWidget extends StatelessWidget {
                     ),
                 ],
               ),
-              if (!hideDivider) ...[
-                const SizedBox(height: 8),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: -Dimensions.paddingSizeDefault),
-                  height: 1,
-                  color: theme.dividerColor.withOpacity(0.4),
-                ),
-              ],
+            ),
+            if (!hideDivider) ...[
+              const SizedBox(height: 8),
+              Container(
+                height: 1,
+                color: theme.dividerColor.withOpacity(0.4),
+              ),
             ],
-          ),
+            const SizedBox(height: Dimensions.paddingSizeSmall + 4),
+          ],
         ),
       ),
     );
