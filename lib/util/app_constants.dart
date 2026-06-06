@@ -17,7 +17,7 @@ class AppConstants {
   static const String googleServerClientId =
       '578255787212-h1rp8b909pn6rsu1odrolk7u10b0smoq.apps.googleusercontent.com';
 
-  static const String baseUrl = 'https://test.jephthahfestus.com.ng';
+  static const String baseUrl = 'https://liwas.ca';
   static const String categoryUri = '/api/v1/categories';
   static const String bannerUri = '/api/v1/banners';
   static const String storeItemUri = '/api/v1/items/latest';
