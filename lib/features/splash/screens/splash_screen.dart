@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:liwas_user/features/auth/controllers/auth_controller.dart';
 import 'package:liwas_user/features/cart/controllers/cart_controller.dart';

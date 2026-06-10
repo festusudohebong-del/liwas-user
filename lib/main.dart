@@ -89,8 +89,6 @@ Future<void> main() async {
     );
   }
 
-  await TrackingHelper.requestTrackingPermission();
-
   runApp(
     DevicePreview(
       enabled: false,
@@ -112,7 +110,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    Future.delayed(const Duration(seconds: 1), () {
+      TrackingHelper.requestTrackingPermission();
+    });
     _route();
   }
 

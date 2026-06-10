@@ -1,0 +1,8 @@
+Integrate device preview, fix API null safety parsing, and update base URLs
+
+- Integrated `device_preview` for responsive UI testing and updated `main.dart` and `pubspec.yaml`.
+- Updated `baseUrl` to `https://test.jephthahfestus.com.ng` and updated `googleServerClientId` in `app_constants.dart`.
+- Fixed null safety issues when parsing integer values from the API in `config_model.dart` and `landing_model.dart` by using `int.tryParse`.
+- Implemented UI and logic improvements across multiple features including checkout, dashboard, home, menu, parcel, and rental modules.
+- Added `device_frame` and `device_preview` dependencies to pubspec and updated the version to `2.0.1+13`.
+- Updated `google-services.json` config.
