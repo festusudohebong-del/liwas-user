@@ -12,10 +12,16 @@ import 'package:liwas_user/util/app_constants.dart';
 // class SplashRouteHelper{
 
   void route({NotificationBodyModel? body}) {
-    double? minimumVersion = _getMinimumVersion();
+    String? minimumVersion = _getMinimumVersion();
     int? minimumBuildNumber = _getMinimumBuildNumber();
     bool isMaintenanceMode = Get.find<SplashController>().configModel!.maintenanceMode!;
-    bool needsUpdate = (AppConstants.appVersion < minimumVersion!) || (AppConstants.appBuildNumber < (minimumBuildNumber ?? 0));
+    
+    bool isVersionOutdated = false;
+    if (minimumVersion != null && minimumVersion.isNotEmpty && AppConstants.appVersionString.isNotEmpty) {
+      isVersionOutdated = _isVersionOlder(AppConstants.appVersionString, minimumVersion);
+    }
+    
+    bool needsUpdate = isVersionOutdated || (AppConstants.appBuildNumber < (minimumBuildNumber ?? 0));
 
     if(needsUpdate || isMaintenanceMode) {
       Get.offNamed(RouteHelper.getUpdateRoute(needsUpdate));
@@ -28,13 +34,25 @@ import 'package:liwas_user/util/app_constants.dart';
     }
   }
 
-  double? _getMinimumVersion() {
+  String? _getMinimumVersion() {
     if (GetPlatform.isAndroid) {
       return Get.find<SplashController>().configModel!.appMinimumVersionAndroid;
     } else if (GetPlatform.isIOS) {
       return Get.find<SplashController>().configModel!.appMinimumVersionIos;
     }
-    return 0;
+    return '';
+  }
+
+  bool _isVersionOlder(String current, String minimum) {
+    List<String> cParts = current.split('.');
+    List<String> mParts = minimum.split('.');
+    for (int i = 0; i < cParts.length && i < mParts.length; i++) {
+      int c = int.tryParse(cParts[i]) ?? 0;
+      int m = int.tryParse(mParts[i]) ?? 0;
+      if (c < m) return true;
+      if (c > m) return false;
+    }
+    return cParts.length < mParts.length;
   }
 
   int? _getMinimumBuildNumber() {

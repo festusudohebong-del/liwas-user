@@ -10,10 +10,10 @@ class ConfigModel {
   DefaultLocation? defaultLocation;
   String? currencySymbol;
   String? currencySymbolDirection;
-  double? appMinimumVersionAndroid;
+  String? appMinimumVersionAndroid;
   int? appMinimumBuildAndroid;
   String? appUrlAndroid;
-  double? appMinimumVersionIos;
+  String? appMinimumVersionIos;
   int? appMinimumBuildIos;
   String? appUrlIos;
   bool? customerVerification;
@@ -194,10 +194,10 @@ class ConfigModel {
     defaultLocation = json['default_location'] != null ? DefaultLocation.fromJson(json['default_location']) : null;
     currencySymbol = json['currency_symbol'];
     currencySymbolDirection = json['currency_symbol_direction'];
-    appMinimumVersionAndroid = json['app_minimum_version_android']?.toDouble() ?? 0.0;
+    appMinimumVersionAndroid = json['app_minimum_version_android']?.toString();
     appMinimumBuildAndroid = json['app_minimum_build_android'] ?? 0;
     appUrlAndroid = json['app_url_android'];
-    appMinimumVersionIos = json['app_minimum_version_ios']?.toDouble() ?? 0.0;
+    appMinimumVersionIos = json['app_minimum_version_ios']?.toString();
     appMinimumBuildIos = json['app_minimum_build_ios'] ?? 0;
     appUrlIos = json['app_url_ios'];
     customerVerification = json['customer_verification'];

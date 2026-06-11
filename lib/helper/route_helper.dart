@@ -934,9 +934,21 @@ class RouteHelper {
     GetPage(name: settingScreen, page: () => SettingPage()),
   ];
 
+  static bool _isVersionOlder(String current, String minimum) {
+    List<String> cParts = current.split('.');
+    List<String> mParts = minimum.split('.');
+    for (int i = 0; i < cParts.length && i < mParts.length; i++) {
+      int c = int.tryParse(cParts[i]) ?? 0;
+      int m = int.tryParse(mParts[i]) ?? 0;
+      if (c < m) return true;
+      if (c > m) return false;
+    }
+    return cParts.length < mParts.length;
+  }
+
   static Widget getRoute(Widget navigateTo,
       {AccessLocationScreen? locationScreen, bool byPuss = false}) {
-    double? minimumVersion = 0;
+    String? minimumVersion = '';
     int? minimumBuildNumber = 0;
     if (GetPlatform.isAndroid) {
       minimumVersion =
@@ -949,7 +961,14 @@ class RouteHelper {
       minimumBuildNumber =
           Get.find<SplashController>().configModel!.appMinimumBuildIos;
     }
-    return ((AppConstants.appVersion < (minimumVersion ?? 0) || AppConstants.appBuildNumber < (minimumBuildNumber ?? 0)) &&
+    
+    bool isVersionOutdated = false;
+    if (minimumVersion != null && minimumVersion.isNotEmpty && AppConstants.appVersionString.isNotEmpty) {
+      isVersionOutdated = _isVersionOlder(AppConstants.appVersionString, minimumVersion);
+    }
+    bool needsUpdate = isVersionOutdated || (AppConstants.appBuildNumber < (minimumBuildNumber ?? 0));
+    
+    return (needsUpdate &&
             !GetPlatform.isWeb)
         ? const UpdateScreen(isUpdate: true)
         : Get.find<SplashController>().configModel!.maintenanceMode!
