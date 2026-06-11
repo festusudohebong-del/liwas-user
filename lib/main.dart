@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'helper/get_di.dart' as di;
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -88,6 +89,13 @@ Future<void> main() async {
       version: "v15.0",
     );
   }
+  try {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String ver = packageInfo.version.split('.').take(2).join('.');
+    AppConstants.appVersion = double.tryParse(ver) ?? 2.0;
+    AppConstants.appBuildNumber = int.tryParse(packageInfo.buildNumber) ?? 0;
+    AppConstants.appVersionString = packageInfo.version;
+  } catch (e) {}
 
   runApp(
     DevicePreview(

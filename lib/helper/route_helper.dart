@@ -937,14 +937,19 @@ class RouteHelper {
   static Widget getRoute(Widget navigateTo,
       {AccessLocationScreen? locationScreen, bool byPuss = false}) {
     double? minimumVersion = 0;
+    int? minimumBuildNumber = 0;
     if (GetPlatform.isAndroid) {
       minimumVersion =
           Get.find<SplashController>().configModel!.appMinimumVersionAndroid;
+      minimumBuildNumber =
+          Get.find<SplashController>().configModel!.appMinimumBuildAndroid;
     } else if (GetPlatform.isIOS) {
       minimumVersion =
           Get.find<SplashController>().configModel!.appMinimumVersionIos;
+      minimumBuildNumber =
+          Get.find<SplashController>().configModel!.appMinimumBuildIos;
     }
-    return (AppConstants.appVersion < (minimumVersion ?? 0) &&
+    return ((AppConstants.appVersion < (minimumVersion ?? 0) || AppConstants.appBuildNumber < (minimumBuildNumber ?? 0)) &&
             !GetPlatform.isWeb)
         ? const UpdateScreen(isUpdate: true)
         : Get.find<SplashController>().configModel!.maintenanceMode!

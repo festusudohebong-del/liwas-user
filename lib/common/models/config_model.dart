@@ -11,8 +11,10 @@ class ConfigModel {
   String? currencySymbol;
   String? currencySymbolDirection;
   double? appMinimumVersionAndroid;
+  int? appMinimumBuildAndroid;
   String? appUrlAndroid;
   double? appMinimumVersionIos;
+  int? appMinimumBuildIos;
   String? appUrlIos;
   bool? customerVerification;
   bool? scheduleOrder;
@@ -101,8 +103,10 @@ class ConfigModel {
     this.currencySymbol,
     this.currencySymbolDirection,
     this.appMinimumVersionAndroid,
+    this.appMinimumBuildAndroid,
     this.appUrlAndroid,
     this.appMinimumVersionIos,
+    this.appMinimumBuildIos,
     this.appUrlIos,
     this.customerVerification,
     this.scheduleOrder,
@@ -191,8 +195,10 @@ class ConfigModel {
     currencySymbol = json['currency_symbol'];
     currencySymbolDirection = json['currency_symbol_direction'];
     appMinimumVersionAndroid = json['app_minimum_version_android']?.toDouble() ?? 0.0;
+    appMinimumBuildAndroid = json['app_minimum_build_android'] ?? 0;
     appUrlAndroid = json['app_url_android'];
     appMinimumVersionIos = json['app_minimum_version_ios']?.toDouble() ?? 0.0;
+    appMinimumBuildIos = json['app_minimum_build_ios'] ?? 0;
     appUrlIos = json['app_url_ios'];
     customerVerification = json['customer_verification'];
     scheduleOrder = json['schedule_order'];
@@ -315,8 +321,10 @@ class ConfigModel {
     data['currency_symbol'] = currencySymbol;
     data['currency_symbol_direction'] = currencySymbolDirection;
     data['app_minimum_version_android'] = appMinimumVersionAndroid;
+    data['app_minimum_build_android'] = appMinimumBuildAndroid;
     data['app_url_android'] = appUrlAndroid;
     data['app_minimum_version_ios'] = appMinimumVersionIos;
+    data['app_minimum_build_ios'] = appMinimumBuildIos;
     data['app_url_ios'] = appUrlIos;
     data['customer_verification'] = customerVerification;
     data['schedule_order'] = scheduleOrder;

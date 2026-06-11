@@ -5,7 +5,9 @@ import 'package:liwas_user/util/images.dart';
 
 class AppConstants {
   static const String appName = 'LiWAS Customer';
-  static const double appVersion = 2.0;
+  static double appVersion = 2.0;
+  static int appBuildNumber = 0;
+  static String appVersionString = '';
 
   ///Flutter sdk 3.38.1
 

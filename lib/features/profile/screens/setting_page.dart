@@ -1,4 +1,4 @@
-﻿// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,7 +60,7 @@ class SettingPage extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text('${'Version'.tr}:', style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeExtraSmall)),
             const SizedBox(width: Dimensions.paddingSizeExtraSmall),
-            Text(AppConstants.appVersion.toStringAsFixed(1), style: ralewayMedium.copyWith(fontSize: Dimensions.fontSizeExtraSmall)),
+            Text(AppConstants.appVersionString, style: ralewayMedium.copyWith(fontSize: Dimensions.fontSizeExtraSmall)),
           ]),
 
         ]),

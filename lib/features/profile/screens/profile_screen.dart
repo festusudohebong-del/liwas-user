@@ -1,4 +1,4 @@
-﻿import 'package:liwas_user/features/profile/widgets/notification_status_change_bottom_sheet.dart';
+import 'package:liwas_user/features/profile/widgets/notification_status_change_bottom_sheet.dart';
 import 'package:liwas_user/features/splash/controllers/splash_controller.dart';
 import 'package:liwas_user/common/controllers/theme_controller.dart';
 import 'package:liwas_user/features/profile/controllers/profile_controller.dart';
@@ -232,7 +232,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text('${'Version'.tr}:', style: ralewayRegular.copyWith(fontSize: Dimensions.fontSizeExtraSmall)),
                   const SizedBox(width: Dimensions.paddingSizeExtraSmall),
-                  Text(AppConstants.appVersion.toStringAsFixed(1), style: ralewayMedium.copyWith(fontSize: Dimensions.fontSizeExtraSmall)),
+                  Text(AppConstants.appVersionString, style: ralewayMedium.copyWith(fontSize: Dimensions.fontSizeExtraSmall)),
                 ]),
 
               ]),

@@ -13,8 +13,9 @@ import 'package:liwas_user/util/app_constants.dart';
 
   void route({NotificationBodyModel? body}) {
     double? minimumVersion = _getMinimumVersion();
+    int? minimumBuildNumber = _getMinimumBuildNumber();
     bool isMaintenanceMode = Get.find<SplashController>().configModel!.maintenanceMode!;
-    bool needsUpdate = AppConstants.appVersion < minimumVersion!;
+    bool needsUpdate = (AppConstants.appVersion < minimumVersion!) || (AppConstants.appBuildNumber < (minimumBuildNumber ?? 0));
 
     if(needsUpdate || isMaintenanceMode) {
       Get.offNamed(RouteHelper.getUpdateRoute(needsUpdate));
@@ -32,6 +33,15 @@ import 'package:liwas_user/util/app_constants.dart';
       return Get.find<SplashController>().configModel!.appMinimumVersionAndroid;
     } else if (GetPlatform.isIOS) {
       return Get.find<SplashController>().configModel!.appMinimumVersionIos;
+    }
+    return 0;
+  }
+
+  int? _getMinimumBuildNumber() {
+    if (GetPlatform.isAndroid) {
+      return Get.find<SplashController>().configModel!.appMinimumBuildAndroid;
+    } else if (GetPlatform.isIOS) {
+      return Get.find<SplashController>().configModel!.appMinimumBuildIos;
     }
     return 0;
   }
